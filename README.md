@@ -23,3 +23,14 @@ Nivel 2 — Unir con el sustantivo: dos columnas (sustantivos y adjetivos mezcla
 Nivel 3 — Completar el párrafo: un banco de adjetivos (con 2 intrusos de más) para completar los huecos de un texto; al comprobar, cada hueco mal completado muestra la palabra correcta entre paréntesis.
 
 Nivel 4 — Género y número: se presenta un sustantivo con su artículo y el alumno elige, entre 3 opciones, la forma del adjetivo que concuerda correctamente en género y número.
+
+
+
+
+"Produccion escrita"
+
+Campos para nombre y apellido y grado/sección
+3 secciones (Inicio / Desarrollo / Final), cada una con la imagen del cuento a la izquierda y un área de escritura con contador de caracteres a la derecha
+Las imágenes están embebidas en el archivo (no necesita archivos externos)
+Botón Enviar producción con validaciones (no deja enviar si falta algún campo)
+Pantalla de confirmación con confetti al finalizar
