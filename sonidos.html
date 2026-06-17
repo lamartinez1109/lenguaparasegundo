@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sonidos compuestos · El Taller de Letras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true">
+  <span class="floatie f1">✏️</span>
+  <span class="floatie f2">📖</span>
+  <span class="floatie f3">⭐</span>
+  <span class="floatie f4">🖍️</span>
+  <span class="floatie f5">✨</span>
+</div>
+
+<!-- ===================== PANTALLA: ACTIVIDAD SONIDOS COMPUESTOS ===================== -->
+<main id="screen-sonidos" class="screen active">
+  <header class="activity-header">
+    <button class="btn-back" id="btnBackHome">← Volver al taller</button>
+    <div class="stars-counter" id="starsCounter">
+      <svg class="star-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.22 6.53 7.21 1.05-5.22 5.09 1.23 7.18L12 17.77l-6.44 3.58 1.23-7.18-5.22-5.09 7.21-1.05L12 1.5z"/></svg>
+      <span id="starsCount">0</span>
+    </div>
+  </header>
+
+  <!-- Selector de nivel -->
+  <section id="levelSelect" class="level-select active">
+    <div class="mascot small" aria-hidden="true">
+      <svg viewBox="0 0 120 160" class="mascot-svg">
+        <ellipse cx="60" cy="150" rx="34" ry="8" class="mascot-shadow"/>
+        <polygon points="60,10 80,40 40,40" class="pencil-tip"/>
+        <rect x="40" y="40" width="40" height="90" rx="10" class="pencil-body"/>
+        <rect x="40" y="118" width="40" height="14" class="pencil-band"/>
+        <circle cx="50" cy="75" r="6" class="eye"/>
+        <circle cx="70" cy="75" r="6" class="eye"/>
+        <circle cx="51.5" cy="73.5" r="2" class="eye-shine"/>
+        <circle cx="71.5" cy="73.5" r="2" class="eye-shine"/>
+        <path d="M48 95 Q60 105 72 95" class="mouth"/>
+      </svg>
+    </div>
+    <p class="eyebrow">Sonidos compuestos · br, bl, pl, pr, cr</p>
+    <h1>¿Qué nivel querés jugar?</h1>
+
+    <div class="level-grid">
+      <button class="level-card" data-level="1">
+        <span class="level-num">Nivel 1</span>
+        <span class="level-title">Clasificar imágenes</span>
+        <span class="level-desc">Escuchá el sonido y elegí la imagen correcta</span>
+      </button>
+      <button class="level-card" data-level="2">
+        <span class="level-num">Nivel 2</span>
+        <span class="level-title">Completar palabras</span>
+        <span class="level-desc">Escribí el sonido que falta en cada palabra</span>
+      </button>
+      <button class="level-card" data-level="3">
+        <span class="level-num">Nivel 3</span>
+        <span class="level-title">Encontrar las correctas</span>
+        <span class="level-desc">Marcá todas las imágenes que llevan ese sonido</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ---------- NIVEL 1 ---------- -->
+  <section id="level1" class="level-screen">
+    <div class="level-header">
+      <button class="btn-back-level" data-back-to="levelSelect">← Niveles</button>
+      <div class="progress-pill"><span id="l1-progress">1</span> / <span id="l1-total">10</span></div>
+    </div>
+    <h2 class="level-question">¿Con qué sonido empieza esta palabra?</h2>
+
+    <div class="game-card">
+      <div class="image-stage" id="l1-image-stage"></div>
+      <div class="options-row" id="l1-options"></div>
+      <div class="feedback-box" id="l1-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="score-row">
+      <span class="score-chip correct"><span id="l1-correct">0</span> aciertos</span>
+      <span class="score-chip incorrect"><span id="l1-incorrect">0</span> errores</span>
+    </div>
+  </section>
+
+  <!-- ---------- NIVEL 2 ---------- -->
+  <section id="level2" class="level-screen">
+    <div class="level-header">
+      <button class="btn-back-level" data-back-to="levelSelect">← Niveles</button>
+      <div class="progress-pill"><span id="l2-progress">1</span> / <span id="l2-total">10</span></div>
+    </div>
+    <h2 class="level-question">Completá el nombre del dibujo</h2>
+
+    <div class="game-card">
+      <div class="image-stage" id="l2-image-stage"></div>
+      <form id="l2-form" class="word-builder" autocomplete="off">
+        <div class="word-blank" id="l2-word-blank"></div>
+        <button type="submit" class="btn-check">Comprobar</button>
+      </form>
+      <div class="feedback-box" id="l2-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="score-row">
+      <span class="score-chip correct"><span id="l2-correct">0</span> aciertos</span>
+      <span class="score-chip incorrect"><span id="l2-incorrect">0</span> errores</span>
+    </div>
+  </section>
+
+  <!-- ---------- NIVEL 3 ---------- -->
+  <section id="level3" class="level-screen">
+    <div class="level-header">
+      <button class="btn-back-level" data-back-to="levelSelect">← Niveles</button>
+      <div class="progress-pill"><span id="l3-progress">1</span> / <span id="l3-total">5</span></div>
+    </div>
+    <h2 class="level-question">Marcá todos los dibujos que llevan el sonido indicado</h2>
+    <p class="level-subtext" id="l3-instruction"></p>
+
+    <div class="game-card wide">
+      <div class="board-table" id="l3-board"></div>
+      <button class="btn-check" id="l3-submit">Comprobar fila</button>
+      <div class="feedback-box" id="l3-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="score-row">
+      <span class="score-chip correct"><span id="l3-correct">0</span> aciertos</span>
+      <span class="score-chip incorrect"><span id="l3-incorrect">0</span> errores</span>
+    </div>
+  </section>
+
+  <!-- ---------- PANTALLA FINAL ---------- -->
+  <section id="levelComplete" class="level-complete">
+    <div class="mascot celebrate" aria-hidden="true">
+      <svg viewBox="0 0 120 160" class="mascot-svg">
+        <ellipse cx="60" cy="150" rx="34" ry="8" class="mascot-shadow"/>
+        <polygon points="60,10 80,40 40,40" class="pencil-tip"/>
+        <rect x="40" y="40" width="40" height="90" rx="10" class="pencil-body"/>
+        <rect x="40" y="118" width="40" height="14" class="pencil-band"/>
+        <circle cx="50" cy="75" r="6" class="eye happy"/>
+        <circle cx="70" cy="75" r="6" class="eye happy"/>
+        <path d="M46 93 Q60 110 74 93" class="mouth happy"/>
+      </svg>
+    </div>
+    <h2 id="completeTitle">¡Muy bien!</h2>
+    <p id="completeText">Completaste el nivel.</p>
+    <div class="complete-stats">
+      <div class="stat-box">
+        <span class="stat-value" id="completeCorrect">0</span>
+        <span class="stat-label">Aciertos</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value" id="completeIncorrect">0</span>
+        <span class="stat-label">Errores</span>
+      </div>
+    </div>
+    <div class="complete-actions">
+      <button class="btn-retry" id="btnRetryLevel">Jugar de nuevo</button>
+      <button class="btn-check" id="btnToLevels">Elegir otro nivel</button>
+    </div>
+  </section>
+</main>
+
+<script>
+/* =========================================================
+   EL TALLER DE LETRAS — Sonidos compuestos (br, bl, pl, pr, cr)
+   ========================================================= */
+
+const WORD_BANK = [
+  // br
+  { word: "brazo",    sound: "br", emoji: "💪" },
+  { word: "brocha",   sound: "br", emoji: "🖌️" },
+  { word: "sombrero", sound: "br", emoji: "👒" },
+  { word: "cabra",    sound: "br", emoji: "🐐" },
+  { word: "libro",    sound: "br", emoji: "📕" },
+  { word: "brócoli",  sound: "br", emoji: "🥦" },
+  // bl
+  { word: "blusa",    sound: "bl", emoji: "👚" },
+  { word: "tabla",    sound: "bl", emoji: "🛹" },
+  { word: "mueble",   sound: "bl", emoji: "🪑" },
+  { word: "doble",    sound: "bl", emoji: "👯" },
+  { word: "establo",  sound: "bl", emoji: "🐎" },
+  { word: "bloque",   sound: "bl", emoji: "🧱" },
+  // pl
+  { word: "planta",   sound: "pl", emoji: "🌱" },
+  { word: "pluma",    sound: "pl", emoji: "🖋️" },
+  { word: "plato",    sound: "pl", emoji: "🍽️" },
+  { word: "playa",    sound: "pl", emoji: "🏖️" },
+  { word: "templo",   sound: "pl", emoji: "🛕" },
+  { word: "plátano",  sound: "pl", emoji: "🍌" },
+  // pr
+  { word: "princesa", sound: "pr", emoji: "👸" },
+  { word: "primo",    sound: "pr", emoji: "🧑" },
+  { word: "premio",   sound: "pr", emoji: "🏆" },
+  { word: "sorpresa", sound: "pr", emoji: "🎁" },
+  { word: "prado",    sound: "pr", emoji: "🌾" },
+  { word: "comprar",  sound: "pr", emoji: "🛒" },
+  // cr
+  { word: "cruz",     sound: "cr", emoji: "✝️" },
+  { word: "cráter",   sound: "cr", emoji: "🌋" },
+  { word: "escribir", sound: "cr", emoji: "✍️" },
+  { word: "escritorio",sound: "cr", emoji: "🗄️" },
+  { word: "secreto",  sound: "cr", emoji: "🤫" },
+  { word: "crema",    sound: "cr", emoji: "🧴" },
+  // distractores
+  { word: "sol",      sound: null, emoji: "☀️" },
+  { word: "gato",     sound: null, emoji: "🐱" },
+  { word: "pez",      sound: null, emoji: "🐟" },
+  { word: "luna",     sound: null, emoji: "🌙" },
+  { word: "flor",     sound: null, emoji: "🌸" },
+  { word: "casa",     sound: null, emoji: "🏠" },
+  { word: "perro",    sound: null, emoji: "🐶" },
+  { word: "manzana",  sound: null, emoji: "🍎" },
+  { word: "globo",    sound: null, emoji: "🎈" },
+  { word: "tren",     sound: null, emoji: "🚂" },
+  { word: "nube",     sound: null, emoji: "☁️" },
+  { word: "vaca",     sound: null, emoji: "🐄" },
+  { word: "torta",    sound: null, emoji: "🎂" },
+  { word: "diente",   sound: null, emoji: "🦷" },
+  { word: "fresa",    sound: null, emoji: "🍓" },
+];
+
+const SOUNDS = ["br", "bl", "pl", "pr", "cr"];
+
+function wordsWithSound(sound){ return WORD_BANK.filter(w => w.sound === sound); }
+function wordsWithoutSound(){ return WORD_BANK.filter(w => w.sound === null); }
+
+function shuffle(array){
+  const arr = array.slice();
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+function pickRandom(array, n){ return shuffle(array).slice(0, n); }
+
+/* ----- Estado y navegación ----- */
+const state = { totalStars: 0, currentLevel: null };
+
+function $(selector){ return document.querySelector(selector); }
+function $all(selector){ return document.querySelectorAll(selector); }
+
+function showSonidosSubview(id){
+  $all("#levelSelect, .level-screen, .level-complete").forEach(s => s.classList.remove("active"));
+  $("#" + id).classList.add("active");
+}
+
+function addStars(n){
+  state.totalStars += n;
+  if(state.totalStars < 0) state.totalStars = 0;
+  $("#starsCount").textContent = state.totalStars;
+}
+
+function launchConfetti(){
+  const emojis = ["⭐", "🎉", "✨", "🌟"];
+  for(let i = 0; i < 18; i++){
+    const piece = document.createElement("span");
+    piece.className = "confetti";
+    piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.animationDuration = (2 + Math.random() * 1.5) + "s";
+    piece.style.fontSize = (1.2 + Math.random() * 1.2) + "rem";
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 3600);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  $("#btnBackHome").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  $all(".level-card").forEach(card => {
+    card.addEventListener("click", () => startLevel(card.dataset.level));
+  });
+
+  $all("[data-back-to]").forEach(btn => {
+    btn.addEventListener("click", () => showSonidosSubview(btn.dataset.backTo));
+  });
+
+  $("#btnToLevels").addEventListener("click", () => showSonidosSubview("levelSelect"));
+  $("#btnRetryLevel").addEventListener("click", () => startLevel(state.currentLevel));
+
+  $("#l2-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    checkLevel2Answer();
+  });
+
+  $("#l3-submit").addEventListener("click", checkLevel3Row);
+});
+
+function startLevel(level){
+  state.currentLevel = level;
+  if(level === "1"){ showSonidosSubview("level1"); initLevel1(); }
+  else if(level === "2"){ showSonidosSubview("level2"); initLevel2(); }
+  else if(level === "3"){ showSonidosSubview("level3"); initLevel3(); }
+}
+
+function showLevelComplete(correct, incorrect, title, text){
+  $("#completeTitle").textContent = title;
+  $("#completeText").textContent = text;
+  $("#completeCorrect").textContent = correct;
+  $("#completeIncorrect").textContent = incorrect;
+  showSonidosSubview("levelComplete");
+  if(correct > incorrect) launchConfetti();
+}
+
+/* =========================================================
+   NIVEL 1 — Clasificar imágenes según el sonido compuesto
+   ========================================================= */
+const L1_TOTAL = 10;
+let l1 = { items: [], index: 0, correct: 0, incorrect: 0 };
+
+function initLevel1(){
+  const pool = WORD_BANK.filter(w => w.sound !== null);
+  l1.items = pickRandom(pool, L1_TOTAL);
+  l1.index = 0; l1.correct = 0; l1.incorrect = 0;
+  $("#l1-total").textContent = L1_TOTAL;
+  $("#l1-correct").textContent = 0;
+  $("#l1-incorrect").textContent = 0;
+  renderLevel1Question();
+}
+
+function renderLevel1Question(){
+  const item = l1.items[l1.index];
+  $("#l1-progress").textContent = l1.index + 1;
+  $("#l1-image-stage").textContent = item.emoji;
+  $("#l1-feedback").textContent = "";
+  $("#l1-feedback").className = "feedback-box";
+
+  const distractors = shuffle(SOUNDS.filter(s => s !== item.sound)).slice(0, 2);
+  const options = shuffle([item.sound, ...distractors]);
+
+  const wrap = $("#l1-options");
+  wrap.innerHTML = "";
+  options.forEach(sound => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn";
+    btn.textContent = sound;
+    btn.addEventListener("click", () => handleLevel1Answer(sound, item, btn));
+    wrap.appendChild(btn);
+  });
+}
+
+function handleLevel1Answer(chosenSound, item, btnEl){
+  const buttons = $all("#l1-options .option-btn");
+  buttons.forEach(b => b.disabled = true);
+
+  const feedback = $("#l1-feedback");
+  if(chosenSound === item.sound){
+    l1.correct++;
+    addStars(1);
+    btnEl.classList.add("correct-flash");
+    feedback.textContent = "¡Muy bien! Es correcto. 🎉";
+    feedback.className = "feedback-box correct";
+  }else{
+    l1.incorrect++;
+    btnEl.classList.add("incorrect-flash");
+    feedback.textContent = `Esa no es. La palabra es "${item.word}", y empieza con "${item.sound}".`;
+    feedback.className = "feedback-box incorrect";
+  }
+  $("#l1-correct").textContent = l1.correct;
+  $("#l1-incorrect").textContent = l1.incorrect;
+
+  setTimeout(() => {
+    l1.index++;
+    if(l1.index < l1.items.length){ renderLevel1Question(); }
+    else{
+      showLevelComplete(l1.correct, l1.incorrect,
+        l1.incorrect === 0 ? "¡Perfecto!" : "¡Nivel completado!",
+        `Clasificaste ${L1_TOTAL} imágenes. ¡Seguí practicando!`);
+    }
+  }, 1400);
+}
+
+/* =========================================================
+   NIVEL 2 — Completar el nombre de las imágenes
+   ========================================================= */
+const L2_TOTAL = 10;
+let l2 = { items: [], index: 0, correct: 0, incorrect: 0, answered: false };
+
+function initLevel2(){
+  const pool = WORD_BANK.filter(w => w.sound !== null);
+  l2.items = pickRandom(pool, L2_TOTAL);
+  l2.index = 0; l2.correct = 0; l2.incorrect = 0;
+  $("#l2-total").textContent = L2_TOTAL;
+  $("#l2-correct").textContent = 0;
+  $("#l2-incorrect").textContent = 0;
+  renderLevel2Question();
+}
+
+function renderLevel2Question(){
+  const item = l2.items[l2.index];
+  l2.answered = false;
+  $("#l2-progress").textContent = l2.index + 1;
+  $("#l2-image-stage").textContent = item.emoji;
+  $("#l2-feedback").textContent = "";
+  $("#l2-feedback").className = "feedback-box";
+
+  const word = item.word;
+  const sound = item.sound;
+  const pos = word.toLowerCase().indexOf(sound);
+  const before = word.slice(0, pos);
+  const after = word.slice(pos + sound.length);
+
+  const blankWrap = $("#l2-word-blank");
+  blankWrap.innerHTML = "";
+
+  if(before){
+    const span = document.createElement("span");
+    span.className = "word-fixed";
+    span.textContent = before;
+    blankWrap.appendChild(span);
+  }
+
+  for(let i = 0; i < sound.length; i++){
+    const input = document.createElement("input");
+    input.type = "text"; input.maxLength = 1;
+    input.className = "blank-input"; input.dataset.idx = i;
+    input.autocomplete = "off";
+    input.addEventListener("input", () => {
+      input.value = input.value.toLowerCase();
+      const inputs = $all("#l2-word-blank .blank-input");
+      const nextInput = inputs[i + 1];
+      if(input.value && nextInput) nextInput.focus();
+    });
+    blankWrap.appendChild(input);
+  }
+
+  if(after){
+    const span = document.createElement("span");
+    span.className = "word-fixed";
+    span.textContent = after;
+    blankWrap.appendChild(span);
+  }
+
+  setTimeout(() => {
+    const firstInput = $("#l2-word-blank .blank-input");
+    if(firstInput) firstInput.focus();
+  }, 50);
+}
+
+function checkLevel2Answer(){
+  if(l2.answered) return;
+  const item = l2.items[l2.index];
+  const inputs = $all("#l2-word-blank .blank-input");
+  const typed = Array.from(inputs).map(i => i.value.trim().toLowerCase()).join("");
+  const feedback = $("#l2-feedback");
+
+  if(typed.length < item.sound.length){
+    feedback.textContent = "Completá los dos casilleros antes de comprobar.";
+    feedback.className = "feedback-box";
+    return;
+  }
+  l2.answered = true;
+
+  if(typed === item.sound){
+    l2.correct++;
+    addStars(1);
+    inputs.forEach(i => { i.classList.add("is-correct"); i.disabled = true; });
+    feedback.textContent = `¡Correcto! "${item.word}" se escribe con "${item.sound}". 🎉`;
+    feedback.className = "feedback-box correct";
+  }else{
+    l2.incorrect++;
+    inputs.forEach(i => { i.classList.add("is-incorrect"); i.disabled = true; });
+    feedback.textContent = `Casi. La palabra correcta es "${item.word}", con "${item.sound}".`;
+    feedback.className = "feedback-box incorrect";
+  }
+  $("#l2-correct").textContent = l2.correct;
+  $("#l2-incorrect").textContent = l2.incorrect;
+
+  setTimeout(() => {
+    l2.index++;
+    if(l2.index < l2.items.length){ renderLevel2Question(); }
+    else{
+      showLevelComplete(l2.correct, l2.incorrect,
+        l2.incorrect === 0 ? "¡Excelente escritura!" : "¡Nivel completado!",
+        `Completaste ${L2_TOTAL} palabras. ¡Seguí así!`);
+    }
+  }, 1600);
+}
+
+/* =========================================================
+   NIVEL 3 — Tablero: identificar imágenes correctas
+   ========================================================= */
+const L3_TOTAL_ROWS = 5;
+const ITEMS_PER_ROW = 6;
+const CORRECT_PER_ROW = 3;
+let l3 = { rows: [], index: 0, correct: 0, incorrect: 0, selected: new Set() };
+
+function buildLevel3Rows(){
+  return shuffle(SOUNDS).map(sound => {
+    const withSound = pickRandom(wordsWithSound(sound), CORRECT_PER_ROW);
+    const withoutSound = pickRandom(wordsWithoutSound(), ITEMS_PER_ROW - CORRECT_PER_ROW);
+    return { sound, items: shuffle([...withSound, ...withoutSound]) };
+  });
+}
+
+function initLevel3(){
+  l3.rows = buildLevel3Rows();
+  l3.index = 0; l3.correct = 0; l3.incorrect = 0;
+  $("#l3-total").textContent = L3_TOTAL_ROWS;
+  $("#l3-correct").textContent = 0;
+  $("#l3-incorrect").textContent = 0;
+  renderLevel3Row();
+}
+
+function renderLevel3Row(){
+  const row = l3.rows[l3.index];
+  l3.selected = new Set();
+  $("#l3-progress").textContent = l3.index + 1;
+  $("#l3-instruction").textContent = `Sonido a buscar: "${row.sound}"`;
+  $("#l3-feedback").textContent = "";
+  $("#l3-feedback").className = "feedback-box";
+  $("#l3-submit").disabled = false;
+
+  const board = $("#l3-board");
+  board.innerHTML = "";
+  const rowEl = document.createElement("div");
+  rowEl.className = "board-row";
+
+  const label = document.createElement("div");
+  label.className = "row-label";
+  label.textContent = row.sound;
+  rowEl.appendChild(label);
+
+  const itemsWrap = document.createElement("div");
+  itemsWrap.className = "row-items";
+
+  row.items.forEach((item, idx) => {
+    const cell = document.createElement("button");
+    cell.className = "cell-btn"; cell.dataset.idx = idx;
+    cell.innerHTML = `<span class="cell-emoji">${item.emoji}</span><span class="cell-name">${item.word}</span>`;
+    cell.addEventListener("click", () => {
+      if(cell.disabled) return;
+      if(l3.selected.has(idx)){ l3.selected.delete(idx); cell.classList.remove("selected"); }
+      else{ l3.selected.add(idx); cell.classList.add("selected"); }
+    });
+    itemsWrap.appendChild(cell);
+  });
+
+  rowEl.appendChild(itemsWrap);
+  board.appendChild(rowEl);
+}
+
+function checkLevel3Row(){
+  const row = l3.rows[l3.index];
+  const cells = $all("#l3-board .cell-btn");
+  $("#l3-submit").disabled = true;
+
+  let rowCorrect = 0, rowIncorrect = 0;
+  cells.forEach((cell, idx) => {
+    const item = row.items[idx];
+    const isTarget = item.sound === row.sound;
+    const wasSelected = l3.selected.has(idx);
+    cell.disabled = true;
+    cell.querySelector(".cell-name").classList.add("revealed");
+
+    if(isTarget && wasSelected){ cell.classList.add("correct-flash"); rowCorrect++; }
+    else if(!isTarget && wasSelected){ cell.classList.add("incorrect-flash"); rowIncorrect++; }
+    else if(isTarget && !wasSelected){ cell.classList.add("missed-flash"); rowIncorrect++; }
+  });
+
+  l3.correct += rowCorrect;
+  l3.incorrect += rowIncorrect;
+  $("#l3-correct").textContent = l3.correct;
+  $("#l3-incorrect").textContent = l3.incorrect;
+
+  if(rowIncorrect === 0) addStars(2);
+  else if(rowCorrect > 0) addStars(1);
+
+  const feedback = $("#l3-feedback");
+  if(rowIncorrect === 0){
+    feedback.textContent = `¡Perfecto! Encontraste todas las palabras con "${row.sound}". 🎉`;
+    feedback.className = "feedback-box correct";
+  }else{
+    feedback.textContent = `Revisá: las marcadas en amarillo también llevaban "${row.sound}", y las rojas no.`;
+    feedback.className = "feedback-box incorrect";
+  }
+
+  setTimeout(() => {
+    l3.index++;
+    if(l3.index < l3.rows.length){ renderLevel3Row(); }
+    else{
+      showLevelComplete(l3.correct, l3.incorrect,
+        l3.incorrect === 0 ? "¡Sos un experto!" : "¡Tablero completado!",
+        `Revisaste ${L3_TOTAL_ROWS} filas de palabras. ¡Buen trabajo!`);
+    }
+  }, 2000);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adjetivos calificativos · El Taller de Letras</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="bg-decor" aria-hidden="true">
+  <span class="floatie f1">✏️</span>
+  <span class="floatie f2">📖</span>
+  <span class="floatie f3">⭐</span>
+  <span class="floatie f4">🖍️</span>
+  <span class="floatie f5">✨</span>
+</div>
+
+<!-- ===================== PANTALLA: ACTIVIDAD ADJETIVOS CALIFICATIVOS ===================== -->
+<main id="screen-adjetivos" class="screen active">
+  <header class="activity-header">
+    <button class="btn-back" id="btnBackHome">← Volver al taller</button>
+    <div class="stars-counter" id="a2-starsCounter">
+      <svg class="star-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.22 6.53 7.21 1.05-5.22 5.09 1.23 7.18L12 17.77l-6.44 3.58 1.23-7.18-5.22-5.09 7.21-1.05L12 1.5z"/></svg>
+      <span id="a2-starsCount">0</span>
+    </div>
+  </header>
+
+  <!-- Selector de nivel -->
+  <section id="a2-levelSelect" class="level-select active">
+    <div class="mascot small" aria-hidden="true">
+      <svg viewBox="0 0 120 160" class="mascot-svg">
+        <ellipse cx="60" cy="150" rx="34" ry="8" class="mascot-shadow"/>
+        <polygon points="60,10 80,40 40,40" class="pencil-tip"/>
+        <rect x="40" y="40" width="40" height="90" rx="10" class="pencil-body"/>
+        <rect x="40" y="118" width="40" height="14" class="pencil-band"/>
+        <circle cx="50" cy="75" r="6" class="eye"/>
+        <circle cx="70" cy="75" r="6" class="eye"/>
+        <circle cx="51.5" cy="73.5" r="2" class="eye-shine"/>
+        <circle cx="71.5" cy="73.5" r="2" class="eye-shine"/>
+        <path d="M48 95 Q60 105 72 95" class="mouth"/>
+      </svg>
+    </div>
+    <p class="eyebrow">Adjetivos calificativos · género y número</p>
+    <h1>¿Qué nivel querés jugar?</h1>
+
+    <div class="level-grid level-grid-4">
+      <button class="level-card" data-a2-level="1">
+        <span class="level-num">Nivel 1</span>
+        <span class="level-title">Marcar adjetivos</span>
+        <span class="level-desc">Tocá los adjetivos que encuentres en la oración</span>
+      </button>
+      <button class="level-card" data-a2-level="2">
+        <span class="level-num">Nivel 2</span>
+        <span class="level-title">Unir con el sustantivo</span>
+        <span class="level-desc">Conectá cada adjetivo con el sustantivo que describe</span>
+      </button>
+      <button class="level-card" data-a2-level="3">
+        <span class="level-num">Nivel 3</span>
+        <span class="level-title">Completar el párrafo</span>
+        <span class="level-desc">Elegí adjetivos de la lista para completar el texto</span>
+      </button>
+      <button class="level-card" data-a2-level="4">
+        <span class="level-num">Nivel 4</span>
+        <span class="level-title">Género y número</span>
+        <span class="level-desc">Elegí el adjetivo que concuerda con el sustantivo</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ---------- NIVEL 1: marcar adjetivos en la oración ---------- -->
+  <section id="a2-level1" class="level-screen">
+    <div class="level-header">
+      <button class="btn-back-level" data-a2-back-to="a2-levelSelect">← Niveles</button>
+      <div class="progress-pill"><span id="a2l1-progress">1</span> / <span id="a2l1-total">8</span></div>
+    </div>
+    <h2 class="level-question">Tocá todos los adjetivos de la oración</h2>
+
+    <div class="game-card wide">
+      <div class="sentence-stage" id="a2l1-sentence"></div>
+      <button class="btn-check" id="a2l1-submit">Comprobar</button>
+      <div class="feedback-box" id="a2l1-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="score-row">
+      <span class="score-chip correct"><span id="a2l1-correct">0</span> aciertos</span>
+      <span class="score-chip incorrect"><span id="a2l1-incorrect">0</span> errores</span>
+    </div>
+  </section>
+
+  <!-- ---------- NIVEL 2: unir adjetivo con sustantivo ---------- -->
+  <section id="a2-level2" class="level-screen">
+    <div class="level-header">
+      <button class="btn-back-level" data-a2-back-to="a2-levelSelect">← Niveles</button>
+      <div class="progress-pill"><span id="a2l2-progress">1</span> / <span id="a2l2-total">6</span></div>
+    </div>
+    <h2 class="level-question">Uní cada adjetivo con su sustantivo</h2>
+    <p class="level-subtext">Tocá un adjetivo y después el sustantivo que le corresponde</p>
+
+    <div class="game-card wide">
+      <div class="match-board" id="a2l2-board"></div>
+      <div class="feedback-box" id="a2l2-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="score-row">
+      <span class="score-chip correct"><span id="a2l2-correct">0</span> aciertos</span>
+      <span class="score-chip incorrect"><span id="a2l2-incorrect">0</span> errores</span>
+    </div>
+  </section>
+
+  <!-- ---------- NIVEL 3: completar párrafo con lista de adjetivos ---------- -->
+  <section id="a2-level3" class="level-screen">
+    <div class="level-header">
+      <button class="btn-back-level" data-a2-back-to="a2-levelSelect">← Niveles</button>
+      <div class="progress-pill"><span id="a2l3-progress">1</span> / <span id="a2l3-total">4</span></div>
+    </div>
+    <h2 class="level-question">Completá el párrafo con los adjetivos de la lista</h2>
+
+    <div class="game-card wide">
+      <div class="word-bank" id="a2l3-bank"></div>
+      <div class="paragraph-stage" id="a2l3-paragraph"></div>
+      <button class="btn-check" id="a2l3-submit">Comprobar</button>
+      <div class="feedback-box" id="a2l3-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="score-row">
+      <span class="score-chip correct"><span id="a2l3-correct">0</span> aciertos</span>
+      <span class="score-chip incorrect"><span id="a2l3-incorrect">0</span> errores</span>
+    </div>
+  </section>
+
+  <!-- ---------- NIVEL 4: seleccionar adjetivo según género y número ---------- -->
+  <section id="a2-level4" class="level-screen">
+    <div class="level-header">
+      <button class="btn-back-level" data-a2-back-to="a2-levelSelect">← Niveles</button>
+      <div class="progress-pill"><span id="a2l4-progress">1</span> / <span id="a2l4-total">8</span></div>
+    </div>
+    <h2 class="level-question">Elegí el adjetivo que concuerda con el sustantivo</h2>
+
+    <div class="game-card">
+      <div class="phrase-stage" id="a2l4-phrase"></div>
+      <div class="options-row" id="a2l4-options"></div>
+      <div class="feedback-box" id="a2l4-feedback" aria-live="polite"></div>
+    </div>
+
+    <div class="score-row">
+      <span class="score-chip correct"><span id="a2l4-correct">0</span> aciertos</span>
+      <span class="score-chip incorrect"><span id="a2l4-incorrect">0</span> errores</span>
+    </div>
+  </section>
+
+  <!-- ---------- PANTALLA FINAL ---------- -->
+  <section id="a2-levelComplete" class="level-complete">
+    <div class="mascot celebrate" aria-hidden="true">
+      <svg viewBox="0 0 120 160" class="mascot-svg">
+        <ellipse cx="60" cy="150" rx="34" ry="8" class="mascot-shadow"/>
+        <polygon points="60,10 80,40 40,40" class="pencil-tip"/>
+        <rect x="40" y="40" width="40" height="90" rx="10" class="pencil-body"/>
+        <rect x="40" y="118" width="40" height="14" class="pencil-band"/>
+        <circle cx="50" cy="75" r="6" class="eye happy"/>
+        <circle cx="70" cy="75" r="6" class="eye happy"/>
+        <path d="M46 93 Q60 110 74 93" class="mouth happy"/>
+      </svg>
+    </div>
+    <h2 id="a2-completeTitle">¡Muy bien!</h2>
+    <p id="a2-completeText">Completaste el nivel.</p>
+    <div class="complete-stats">
+      <div class="stat-box">
+        <span class="stat-value" id="a2-completeCorrect">0</span>
+        <span class="stat-label">Aciertos</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-value" id="a2-completeIncorrect">0</span>
+        <span class="stat-label">Errores</span>
+      </div>
+    </div>
+    <div class="complete-actions">
+      <button class="btn-retry" id="a2-btnRetryLevel">Jugar de nuevo</button>
+      <button class="btn-check" id="a2-btnToLevels">Elegir otro nivel</button>
+    </div>
+  </section>
+</main>
+
+<script>
+/* =========================================================
+   EL TALLER DE LETRAS — Adjetivos calificativos
+   ========================================================= */
+
+function shuffle(array){
+  const arr = array.slice();
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+function pickRandom(array, n){ return shuffle(array).slice(0, n); }
+
+function $(selector){ return document.querySelector(selector); }
+function $all(selector){ return document.querySelectorAll(selector); }
+
+/* ----- Datos ----- */
+const A2_SENTENCES = [
+  { tokens: [{ text: "El", isAdj: false }, { text: "perro", isAdj: false }, { text: "negro", isAdj: true }, { text: "tiene", isAdj: false }, { text: "una", isAdj: false }, { text: "cola", isAdj: false }, { text: "corta", isAdj: true }, { text: ".", isAdj: false, skip: true }] },
+  { tokens: [{ text: "La", isAdj: false }, { text: "casa", isAdj: false }, { text: "azul", isAdj: true }, { text: "tiene", isAdj: false }, { text: "un", isAdj: false }, { text: "jardín", isAdj: false }, { text: "enorme", isAdj: true }, { text: ".", isAdj: false, skip: true }] },
+  { tokens: [{ text: "Mi", isAdj: false }, { text: "abuela", isAdj: false }, { text: "cuenta", isAdj: false }, { text: "historias", isAdj: false }, { text: "divertidas", isAdj: true }, { text: "y", isAdj: false }, { text: "largas", isAdj: true }, { text: ".", isAdj: false, skip: true }] },
+  { tokens: [{ text: "El", isAdj: false }, { text: "gato", isAdj: false }, { text: "pequeño", isAdj: true }, { text: "duerme", isAdj: false }, { text: "en", isAdj: false }, { text: "la", isAdj: false }, { text: "manta", isAdj: false }, { text: "suave", isAdj: true }, { text: ".", isAdj: false, skip: true }] },
+  { tokens: [{ text: "Los", isAdj: false }, { text: "niños", isAdj: false }, { text: "alegres", isAdj: true }, { text: "juegan", isAdj: false }, { text: "en", isAdj: false }, { text: "el", isAdj: false }, { text: "patio", isAdj: false }, { text: "grande", isAdj: true }, { text: ".", isAdj: false, skip: true }] },
+  { tokens: [{ text: "Compré", isAdj: false }, { text: "una", isAdj: false }, { text: "fruta", isAdj: false }, { text: "dulce", isAdj: true }, { text: "y", isAdj: false }, { text: "jugosa", isAdj: true }, { text: ".", isAdj: false, skip: true }] },
+  { tokens: [{ text: "El", isAdj: false }, { text: "cielo", isAdj: false }, { text: "está", isAdj: false }, { text: "gris", isAdj: true }, { text: "y", isAdj: false }, { text: "frío", isAdj: true }, { text: "hoy", isAdj: false }, { text: ".", isAdj: false, skip: true }] },
+  { tokens: [{ text: "Tengo", isAdj: false }, { text: "un", isAdj: false }, { text: "amigo", isAdj: false }, { text: "simpático", isAdj: true }, { text: "y", isAdj: false }, { text: "honesto", isAdj: true }, { text: ".", isAdj: false, skip: true }] }
+];
+
+const A2_PAIRS = [
+  { noun: "casa",      adj: "blanca" },
+  { noun: "perro",     adj: "peludo" },
+  { noun: "flores",    adj: "coloridas" },
+  { noun: "niño",      adj: "curioso" },
+  { noun: "montañas",  adj: "altas" },
+  { noun: "libro",     adj: "pesado" },
+  { noun: "gata",      adj: "juguetona" },
+  { noun: "zapatos",   adj: "nuevos" },
+  { noun: "sopa",      adj: "salada" },
+  { noun: "estrellas", adj: "brillantes" },
+  { noun: "camino",    adj: "largo" },
+  { noun: "abuelo",    adj: "sabio" },
+];
+
+const A2_PARAGRAPHS = [
+  { parts: ["Hoy fuimos al parque. El día estaba ", 0, " y el cielo se veía muy ", 1, ". Vimos un perro ", 2, " que corría detrás de una pelota ", 3, "."], blanks: ["soleado", "celeste", "juguetón", "redonda"], bank: ["soleado", "celeste", "juguetón", "redonda", "triste", "cuadrada"] },
+  { parts: ["Mi habitación es ", 0, ". Tiene una cama ", 1, " junto a la ventana ", 2, " y una alfombra ", 3, " en el piso."], blanks: ["cómoda", "blanda", "grande", "suave"], bank: ["cómoda", "blanda", "grande", "suave", "ruidosa", "pesada"] },
+  { parts: ["En el zoológico vimos un león ", 0, ", una jirafa ", 1, " y unos monos ", 2, ". Al final comimos un helado ", 3, "."], blanks: ["feroz", "alta", "traviesos", "delicioso"], bank: ["feroz", "alta", "traviesos", "delicioso", "lento", "amargo"] },
+  { parts: ["La fiesta de cumpleaños fue muy ", 0, ". Había globos ", 1, " por todas partes y una torta ", 2, " con velas ", 3, "."], blanks: ["divertida", "coloridos", "deliciosa", "pequeñas"], bank: ["divertida", "coloridos", "deliciosa", "pequeñas", "aburrida", "salada"] }
+];
+
+const A2_AGREEMENT = [
+  { article: "El",   noun: "perro",     gender: "m", number: "s", forms: { ms: "blanco",   fs: "blanca",   mp: "blancos",   fp: "blancas" } },
+  { article: "La",   noun: "casa",      gender: "f", number: "s", forms: { ms: "pequeño",  fs: "pequeña",  mp: "pequeños",  fp: "pequeñas" } },
+  { article: "Los",  noun: "niños",     gender: "m", number: "p", forms: { ms: "travieso",  fs: "traviesa",  mp: "traviesos",  fp: "traviesas" } },
+  { article: "Las",  noun: "flores",    gender: "f", number: "p", forms: { ms: "hermoso",  fs: "hermosa",  mp: "hermosos",  fp: "hermosas" } },
+  { article: "El",   noun: "camino",    gender: "m", number: "s", forms: { ms: "largo",    fs: "larga",    mp: "largos",    fp: "largas" } },
+  { article: "La",   noun: "mochila",   gender: "f", number: "s", forms: { ms: "pesado",   fs: "pesada",   mp: "pesados",   fp: "pesadas" } },
+  { article: "Los",  noun: "gatos",     gender: "m", number: "p", forms: { ms: "negro",    fs: "negra",    mp: "negros",    fp: "negras" } },
+  { article: "Las",  noun: "manzanas",  gender: "f", number: "p", forms: { ms: "maduro",   fs: "madura",   mp: "maduros",   fp: "maduras" } },
+  { article: "El",   noun: "libro",     gender: "m", number: "s", forms: { ms: "aburrido", fs: "aburrida", mp: "aburridos", fp: "aburridas" } },
+  { article: "La",   noun: "torta",     gender: "f", number: "s", forms: { ms: "rico",     fs: "rica",     mp: "ricos",     fp: "ricas" } },
+  { article: "Los",  noun: "caminos",   gender: "m", number: "p", forms: { ms: "angosto",  fs: "angosta",  mp: "angostos",  fp: "angostas" } },
+  { article: "Las",  noun: "sillas",    gender: "f", number: "p", forms: { ms: "roto",     fs: "rota",     mp: "rotos",     fp: "rotas" } },
+];
+
+function correctForm(item){
+  const key = (item.gender === "m" ? "m" : "f") + (item.number === "s" ? "s" : "p");
+  return item.forms[key];
+}
+function allForms(item){
+  return [item.forms.ms, item.forms.fs, item.forms.mp, item.forms.fp];
+}
+
+/* ----- Estado y navegación ----- */
+const a2State = { currentLevel: null, totalStars: 0 };
+
+function showAdjetivosSubview(id){
+  $all("#a2-levelSelect, #screen-adjetivos .level-screen, #a2-levelComplete").forEach(s => s.classList.remove("active"));
+  $("#" + id).classList.add("active");
+}
+
+function addA2Stars(n){
+  a2State.totalStars += n;
+  if(a2State.totalStars < 0) a2State.totalStars = 0;
+  $("#a2-starsCount").textContent = a2State.totalStars;
+}
+
+function launchConfetti(){
+  const emojis = ["⭐", "🎉", "✨", "🌟"];
+  for(let i = 0; i < 18; i++){
+    const piece = document.createElement("span");
+    piece.className = "confetti";
+    piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.animationDuration = (2 + Math.random() * 1.5) + "s";
+    piece.style.fontSize = (1.2 + Math.random() * 1.2) + "rem";
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 3600);
+  }
+}
+
+function showA2LevelComplete(correct, incorrect, title, text){
+  $("#a2-completeTitle").textContent = title;
+  $("#a2-completeText").textContent = text;
+  $("#a2-completeCorrect").textContent = correct;
+  $("#a2-completeIncorrect").textContent = incorrect;
+  showAdjetivosSubview("a2-levelComplete");
+  if(correct > incorrect) launchConfetti();
+}
+
+function startA2Level(level){
+  a2State.currentLevel = level;
+  if(level === "1"){ showAdjetivosSubview("a2-level1"); initA2Level1(); }
+  else if(level === "2"){ showAdjetivosSubview("a2-level2"); initA2Level2(); }
+  else if(level === "3"){ showAdjetivosSubview("a2-level3"); initA2Level3(); }
+  else if(level === "4"){ showAdjetivosSubview("a2-level4"); initA2Level4(); }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  $("#btnBackHome").addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  $all("#a2-levelSelect .level-card[data-a2-level]").forEach(card => {
+    card.addEventListener("click", () => startA2Level(card.dataset.a2Level));
+  });
+
+  $all("[data-a2-back-to]").forEach(btn => {
+    btn.addEventListener("click", () => showAdjetivosSubview(btn.dataset.a2BackTo));
+  });
+
+  $("#a2-btnToLevels").addEventListener("click", () => showAdjetivosSubview("a2-levelSelect"));
+  $("#a2-btnRetryLevel").addEventListener("click", () => startA2Level(a2State.currentLevel));
+  $("#a2l1-submit").addEventListener("click", checkA2Level1);
+  $("#a2l3-submit").addEventListener("click", checkA2Level3);
+});
+
+/* =========================================================
+   NIVEL 1 — Marcar los adjetivos en la oración
+   ========================================================= */
+const A2L1_TOTAL = 8;
+let a2l1 = { items: [], index: 0, correct: 0, incorrect: 0, selected: new Set() };
+
+function initA2Level1(){
+  a2l1.items = pickRandom(A2_SENTENCES, A2L1_TOTAL);
+  a2l1.index = 0; a2l1.correct = 0; a2l1.incorrect = 0;
+  $("#a2l1-total").textContent = a2l1.items.length;
+  $("#a2l1-correct").textContent = 0;
+  $("#a2l1-incorrect").textContent = 0;
+  renderA2Level1();
+}
+
+function renderA2Level1(){
+  const item = a2l1.items[a2l1.index];
+  a2l1.selected = new Set();
+  $("#a2l1-progress").textContent = a2l1.index + 1;
+  $("#a2l1-feedback").textContent = "";
+  $("#a2l1-feedback").className = "feedback-box";
+  $("#a2l1-submit").disabled = false;
+
+  const stage = $("#a2l1-sentence");
+  stage.innerHTML = "";
+  item.tokens.forEach((tok, idx) => {
+    if(tok.skip){
+      const span = document.createElement("span");
+      span.className = "sentence-punct";
+      span.textContent = tok.text;
+      stage.appendChild(span);
+      return;
+    }
+    const word = document.createElement("button");
+    word.className = "sentence-word";
+    word.textContent = tok.text;
+    word.dataset.idx = idx;
+    word.addEventListener("click", () => {
+      if(word.disabled) return;
+      if(a2l1.selected.has(idx)){ a2l1.selected.delete(idx); word.classList.remove("selected"); }
+      else{ a2l1.selected.add(idx); word.classList.add("selected"); }
+    });
+    stage.appendChild(word);
+  });
+}
+
+function checkA2Level1(){
+  const item = a2l1.items[a2l1.index];
+  const words = $all("#a2l1-sentence .sentence-word");
+  $("#a2l1-submit").disabled = true;
+
+  let roundCorrect = 0, roundIncorrect = 0;
+  words.forEach(word => {
+    const idx = Number(word.dataset.idx);
+    const tok = item.tokens[idx];
+    const wasSelected = a2l1.selected.has(idx);
+    word.disabled = true;
+    if(tok.isAdj && wasSelected){ word.classList.add("correct-flash"); roundCorrect++; }
+    else if(!tok.isAdj && wasSelected){ word.classList.add("incorrect-flash"); roundIncorrect++; }
+    else if(tok.isAdj && !wasSelected){ word.classList.add("missed-flash"); roundIncorrect++; }
+  });
+
+  a2l1.correct += roundCorrect;
+  a2l1.incorrect += roundIncorrect;
+  $("#a2l1-correct").textContent = a2l1.correct;
+  $("#a2l1-incorrect").textContent = a2l1.incorrect;
+
+  if(roundIncorrect === 0) addA2Stars(2);
+  else if(roundCorrect > 0) addA2Stars(1);
+
+  const feedback = $("#a2l1-feedback");
+  const totalAdj = item.tokens.filter(t => t.isAdj).length;
+  if(roundIncorrect === 0){
+    feedback.textContent = totalAdj === 1 ? "¡Perfecto! Encontraste el adjetivo. 🎉" : `¡Perfecto! Encontraste los ${totalAdj} adjetivos. 🎉`;
+    feedback.className = "feedback-box correct";
+  }else{
+    feedback.textContent = "Revisá: en verde lo que acertaste, en amarillo los adjetivos que se te pasaron, en rojo lo que no era adjetivo.";
+    feedback.className = "feedback-box incorrect";
+  }
+
+  setTimeout(() => {
+    a2l1.index++;
+    if(a2l1.index < a2l1.items.length){ renderA2Level1(); }
+    else{
+      showA2LevelComplete(a2l1.correct, a2l1.incorrect,
+        a2l1.incorrect === 0 ? "¡Excelente!" : "¡Nivel completado!",
+        `Revisaste ${a2l1.items.length} oraciones buscando adjetivos.`);
+    }
+  }, 2200);
+}
+
+/* =========================================================
+   NIVEL 2 — Unir cada adjetivo con su sustantivo
+   ========================================================= */
+const A2L2_TOTAL = 6;
+const A2L2_PAIRS_PER_ROUND = 4;
+let a2l2 = { rounds: [], index: 0, correct: 0, incorrect: 0, matched: new Set(), selectedNoun: null, selectedAdj: null };
+
+function initA2Level2(){
+  a2l2.rounds = [];
+  for(let i = 0; i < A2L2_TOTAL; i++) a2l2.rounds.push(pickRandom(A2_PAIRS, A2L2_PAIRS_PER_ROUND));
+  a2l2.index = 0; a2l2.correct = 0; a2l2.incorrect = 0;
+  $("#a2l2-total").textContent = a2l2.rounds.length;
+  $("#a2l2-correct").textContent = 0;
+  $("#a2l2-incorrect").textContent = 0;
+  renderA2Level2();
+}
+
+function renderA2Level2(){
+  const pairs = a2l2.rounds[a2l2.index];
+  a2l2.matched = new Set(); a2l2.selectedNoun = null; a2l2.selectedAdj = null;
+  $("#a2l2-progress").textContent = a2l2.index + 1;
+  $("#a2l2-feedback").textContent = "";
+  $("#a2l2-feedback").className = "feedback-box";
+
+  const nounsOrder = shuffle(pairs.map((p, i) => i));
+  const adjsOrder = shuffle(pairs.map((p, i) => i));
+
+  const board = $("#a2l2-board");
+  board.innerHTML = "";
+
+  const nounsCol = document.createElement("div");
+  nounsCol.className = "match-col";
+  nounsOrder.forEach(i => {
+    const btn = document.createElement("button");
+    btn.className = "match-item noun-item";
+    btn.textContent = pairs[i].noun; btn.dataset.pairIdx = i;
+    btn.addEventListener("click", () => handleA2L2NounClick(btn, i));
+    nounsCol.appendChild(btn);
+  });
+
+  const adjsCol = document.createElement("div");
+  adjsCol.className = "match-col";
+  adjsOrder.forEach(i => {
+    const btn = document.createElement("button");
+    btn.className = "match-item adj-item";
+    btn.textContent = pairs[i].adj; btn.dataset.pairIdx = i;
+    btn.addEventListener("click", () => handleA2L2AdjClick(btn, i));
+    adjsCol.appendChild(btn);
+  });
+
+  board.appendChild(nounsCol);
+  board.appendChild(adjsCol);
+}
+
+function handleA2L2NounClick(btn, pairIdx){
+  if(btn.disabled) return;
+  $all("#a2l2-board .noun-item").forEach(b => b.classList.remove("active-pick"));
+  btn.classList.add("active-pick");
+  a2l2.selectedNoun = { btn, pairIdx };
+  tryA2L2Match();
+}
+
+function handleA2L2AdjClick(btn, pairIdx){
+  if(btn.disabled) return;
+  $all("#a2l2-board .adj-item").forEach(b => b.classList.remove("active-pick"));
+  btn.classList.add("active-pick");
+  a2l2.selectedAdj = { btn, pairIdx };
+  tryA2L2Match();
+}
+
+function tryA2L2Match(){
+  if(!a2l2.selectedNoun || !a2l2.selectedAdj) return;
+  const { btn: nounBtn, pairIdx: nounIdx } = a2l2.selectedNoun;
+  const { btn: adjBtn, pairIdx: adjIdx } = a2l2.selectedAdj;
+  const pairs = a2l2.rounds[a2l2.index];
+  const feedback = $("#a2l2-feedback");
+
+  if(nounIdx === adjIdx){
+    nounBtn.classList.remove("active-pick"); adjBtn.classList.remove("active-pick");
+    nounBtn.classList.add("matched"); adjBtn.classList.add("matched");
+    nounBtn.disabled = true; adjBtn.disabled = true;
+    a2l2.matched.add(nounIdx); a2l2.correct++;
+    addA2Stars(1);
+    feedback.textContent = `¡Bien! "${pairs[nounIdx].noun}" va con "${pairs[nounIdx].adj}".`;
+    feedback.className = "feedback-box correct";
+  }else{
+    a2l2.incorrect++;
+    feedback.textContent = "Esa unión no es correcta. Probá de nuevo.";
+    feedback.className = "feedback-box incorrect";
+    nounBtn.classList.add("incorrect-flash"); adjBtn.classList.add("incorrect-flash");
+    setTimeout(() => {
+      nounBtn.classList.remove("incorrect-flash", "active-pick");
+      adjBtn.classList.remove("incorrect-flash", "active-pick");
+    }, 500);
+  }
+
+  $("#a2l2-correct").textContent = a2l2.correct;
+  $("#a2l2-incorrect").textContent = a2l2.incorrect;
+  a2l2.selectedNoun = null; a2l2.selectedAdj = null;
+
+  if(a2l2.matched.size === pairs.length){
+    setTimeout(() => {
+      a2l2.index++;
+      if(a2l2.index < a2l2.rounds.length){ renderA2Level2(); }
+      else{
+        showA2LevelComplete(a2l2.correct, a2l2.incorrect,
+          a2l2.incorrect === 0 ? "¡Conexión perfecta!" : "¡Nivel completado!",
+          `Uniste adjetivos y sustantivos en ${a2l2.rounds.length} rondas.`);
+      }
+    }, 900);
+  }
+}
+
+/* =========================================================
+   NIVEL 3 — Completar el párrafo con adjetivos de una lista
+   ========================================================= */
+let a2l3 = { items: [], index: 0, correct: 0, incorrect: 0, filled: [], answered: false };
+
+function initA2Level3(){
+  a2l3.items = shuffle(A2_PARAGRAPHS);
+  a2l3.index = 0; a2l3.correct = 0; a2l3.incorrect = 0;
+  $("#a2l3-total").textContent = a2l3.items.length;
+  $("#a2l3-correct").textContent = 0;
+  $("#a2l3-incorrect").textContent = 0;
+  renderA2Level3();
+}
+
+function renderA2Level3(){
+  const item = a2l3.items[a2l3.index];
+  a2l3.filled = new Array(item.blanks.length).fill(null);
+  a2l3.answered = false; a2l3.activeBlank = null;
+  $("#a2l3-progress").textContent = a2l3.index + 1;
+  $("#a2l3-feedback").textContent = "";
+  $("#a2l3-feedback").className = "feedback-box";
+  $("#a2l3-submit").disabled = false;
+
+  const bank = $("#a2l3-bank");
+  bank.innerHTML = "";
+  shuffle(item.bank).forEach(word => {
+    const chip = document.createElement("button");
+    chip.className = "bank-chip"; chip.textContent = word; chip.dataset.word = word;
+    chip.addEventListener("click", () => {
+      if(chip.disabled) return;
+      if(a2l3.activeBlank === null) return;
+      placeA2L3Word(word, chip);
+    });
+    bank.appendChild(chip);
+  });
+
+  const stage = $("#a2l3-paragraph");
+  stage.innerHTML = "";
+  item.parts.forEach(part => {
+    if(typeof part === "number"){
+      const blankIdx = part;
+      const blankBtn = document.createElement("button");
+      blankBtn.className = "paragraph-blank";
+      blankBtn.textContent = "______"; blankBtn.dataset.blankIdx = blankIdx;
+      blankBtn.addEventListener("click", () => selectA2L3Blank(blankBtn, blankIdx));
+      stage.appendChild(blankBtn);
+    }else{
+      const span = document.createElement("span");
+      span.textContent = part;
+      stage.appendChild(span);
+    }
+  });
+
+  const firstBlank = $("#a2l3-paragraph .paragraph-blank");
+  if(firstBlank) selectA2L3Blank(firstBlank, 0);
+}
+
+function selectA2L3Blank(blankBtn, idx){
+  if(a2l3.answered) return;
+  $all("#a2l3-paragraph .paragraph-blank").forEach(b => b.classList.remove("active-blank"));
+  blankBtn.classList.add("active-blank");
+  a2l3.activeBlank = idx;
+}
+
+function placeA2L3Word(word, chip){
+  const idx = a2l3.activeBlank;
+  if(idx === null) return;
+  const prevWord = a2l3.filled[idx];
+  if(prevWord){
+    $all("#a2l3-bank .bank-chip").forEach(c => { if(c.dataset.word === prevWord && c.disabled) c.disabled = false; });
+  }
+  a2l3.filled[idx] = word; chip.disabled = true;
+  const blankBtn = $(`#a2l3-paragraph .paragraph-blank[data-blank-idx="${idx}"]`);
+  blankBtn.textContent = word; blankBtn.classList.add("filled"); blankBtn.classList.remove("active-blank");
+  a2l3.activeBlank = null;
+  const blanks = $all("#a2l3-paragraph .paragraph-blank");
+  const nextEmpty = Array.from(blanks).find(b => !a2l3.filled[Number(b.dataset.blankIdx)]);
+  if(nextEmpty) selectA2L3Blank(nextEmpty, Number(nextEmpty.dataset.blankIdx));
+}
+
+function checkA2Level3(){
+  if(a2l3.answered) return;
+  const item = a2l3.items[a2l3.index];
+  if(a2l3.filled.some(w => !w)){
+    $("#a2l3-feedback").textContent = "Completá todos los espacios antes de comprobar.";
+    $("#a2l3-feedback").className = "feedback-box";
+    return;
+  }
+  a2l3.answered = true; $("#a2l3-submit").disabled = true;
+
+  let roundCorrect = 0, roundIncorrect = 0;
+  $all("#a2l3-paragraph .paragraph-blank").forEach(blankBtn => {
+    const idx = Number(blankBtn.dataset.blankIdx);
+    const isCorrect = a2l3.filled[idx] === item.blanks[idx];
+    if(isCorrect){ blankBtn.classList.add("is-correct"); roundCorrect++; }
+    else{ blankBtn.classList.add("is-incorrect"); blankBtn.textContent = `${a2l3.filled[idx]} (correcto: ${item.blanks[idx]})`; roundIncorrect++; }
+  });
+
+  a2l3.correct += roundCorrect; a2l3.incorrect += roundIncorrect;
+  $("#a2l3-correct").textContent = a2l3.correct;
+  $("#a2l3-incorrect").textContent = a2l3.incorrect;
+
+  if(roundIncorrect === 0) addA2Stars(2);
+  else if(roundCorrect > 0) addA2Stars(1);
+
+  const feedback = $("#a2l3-feedback");
+  if(roundIncorrect === 0){ feedback.textContent = "¡Perfecto! Completaste el párrafo con los adjetivos correctos. 🎉"; feedback.className = "feedback-box correct"; }
+  else{ feedback.textContent = "Revisá los espacios marcados en rojo: ahí te muestro la palabra correcta."; feedback.className = "feedback-box incorrect"; }
+
+  setTimeout(() => {
+    a2l3.index++;
+    if(a2l3.index < a2l3.items.length){ renderA2Level3(); }
+    else{
+      showA2LevelComplete(a2l3.correct, a2l3.incorrect,
+        a2l3.incorrect === 0 ? "¡Excelente redacción!" : "¡Nivel completado!",
+        `Completaste ${a2l3.items.length} párrafos con adjetivos.`);
+    }
+  }, 2600);
+}
+
+/* =========================================================
+   NIVEL 4 — Elegir el adjetivo que concuerda en género y número
+   ========================================================= */
+const A2L4_TOTAL = 8;
+let a2l4 = { items: [], index: 0, correct: 0, incorrect: 0 };
+
+function initA2Level4(){
+  a2l4.items = pickRandom(A2_AGREEMENT, A2L4_TOTAL);
+  a2l4.index = 0; a2l4.correct = 0; a2l4.incorrect = 0;
+  $("#a2l4-total").textContent = a2l4.items.length;
+  $("#a2l4-correct").textContent = 0;
+  $("#a2l4-incorrect").textContent = 0;
+  renderA2Level4();
+}
+
+function renderA2Level4(){
+  const item = a2l4.items[a2l4.index];
+  $("#a2l4-progress").textContent = a2l4.index + 1;
+  $("#a2l4-feedback").textContent = "";
+  $("#a2l4-feedback").className = "feedback-box";
+  $("#a2l4-phrase").innerHTML = `${item.article} <span class="phrase-noun">${item.noun}</span> es...`;
+
+  const correct = correctForm(item);
+  const uniqueWrong = [...new Set(allForms(item).filter(f => f !== correct))];
+  const options = shuffle([correct, ...shuffle(uniqueWrong).slice(0, 2)]);
+
+  const wrap = $("#a2l4-options");
+  wrap.innerHTML = "";
+  options.forEach(form => {
+    const btn = document.createElement("button");
+    btn.className = "option-btn"; btn.textContent = form;
+    btn.addEventListener("click", () => handleA2L4Answer(form, correct, btn, item));
+    wrap.appendChild(btn);
+  });
+}
+
+function handleA2L4Answer(chosen, correct, btnEl, item){
+  $all("#a2l4-options .option-btn").forEach(b => b.disabled = true);
+  const feedback = $("#a2l4-feedback");
+  if(chosen === correct){
+    a2l4.correct++; addA2Stars(1);
+    btnEl.classList.add("correct-flash");
+    feedback.textContent = `¡Correcto! "${item.article} ${item.noun} es ${correct}". 🎉`;
+    feedback.className = "feedback-box correct";
+  }else{
+    a2l4.incorrect++;
+    btnEl.classList.add("incorrect-flash");
+    feedback.textContent = `Esa no concuerda. Lo correcto es "${item.article} ${item.noun} es ${correct}".`;
+    feedback.className = "feedback-box incorrect";
+  }
+  $("#a2l4-correct").textContent = a2l4.correct;
+  $("#a2l4-incorrect").textContent = a2l4.incorrect;
+
+  setTimeout(() => {
+    a2l4.index++;
+    if(a2l4.index < a2l4.items.length){ renderA2Level4(); }
+    else{
+      showA2LevelComplete(a2l4.correct, a2l4.incorrect,
+        a2l4.incorrect === 0 ? "¡Dominás la concordancia!" : "¡Nivel completado!",
+        `Practicaste género y número en ${a2l4.items.length} frases.`);
+    }
+  }, 1600);
+}
+</script>
+</body>
+</html>
