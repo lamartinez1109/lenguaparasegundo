@@ -51,14 +51,14 @@
       <button class="btn-enter" data-open="sonidos">Empezar <span class="arrow">→</span></button>
     </article>
 
-    <article class="activity-card disabled" aria-disabled="true">
+    <article class="activity-card" data-activity="adjetivos">
       <div class="card-icon-wrap">
         <span class="card-icon">📝</span>
       </div>
-      <h2>Próximamente</h2>
-      <p>Nueva estación en camino</p>
-      <div class="card-tag muted">En preparación</div>
-      <button class="btn-enter" disabled>Pronto</button>
+      <h2>Adjetivos calificativos</h2>
+      <p>Género y número</p>
+      <div class="card-tag">4 niveles</div>
+      <button class="btn-enter" data-open="adjetivos">Empezar <span class="arrow">→</span></button>
     </article>
 
     <article class="activity-card disabled" aria-disabled="true">
@@ -73,150 +73,16 @@
   </section>
 </main>
 
-<!-- ===================== PANTALLA: ACTIVIDAD SONIDOS COMPUESTOS ===================== -->
-<main id="screen-sonidos" class="screen">
-  <header class="activity-header">
-    <button class="btn-back" id="btnBackHome">← Volver al taller</button>
-    <div class="stars-counter" id="starsCounter">
-      <svg class="star-icon-svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5l3.22 6.53 7.21 1.05-5.22 5.09 1.23 7.18L12 17.77l-6.44 3.58 1.23-7.18-5.22-5.09 7.21-1.05L12 1.5z"/></svg>
-      <span id="starsCount">0</span>
-    </div>
-  </header>
-
-  <!-- Selector de nivel -->
-  <section id="levelSelect" class="level-select">
-    <div class="mascot small" aria-hidden="true">
-      <svg viewBox="0 0 120 160" class="mascot-svg">
-        <ellipse cx="60" cy="150" rx="34" ry="8" class="mascot-shadow"/>
-        <polygon points="60,10 80,40 40,40" class="pencil-tip"/>
-        <rect x="40" y="40" width="40" height="90" rx="10" class="pencil-body"/>
-        <rect x="40" y="118" width="40" height="14" class="pencil-band"/>
-        <circle cx="50" cy="75" r="6" class="eye"/>
-        <circle cx="70" cy="75" r="6" class="eye"/>
-        <circle cx="51.5" cy="73.5" r="2" class="eye-shine"/>
-        <circle cx="71.5" cy="73.5" r="2" class="eye-shine"/>
-        <path d="M48 95 Q60 105 72 95" class="mouth"/>
-      </svg>
-    </div>
-    <p class="eyebrow">Sonidos compuestos · br, bl, pl, pr, cr</p>
-    <h1>¿Qué nivel querés jugar?</h1>
-
-    <div class="level-grid">
-      <button class="level-card" data-level="1">
-        <span class="level-num">Nivel 1</span>
-        <span class="level-title">Clasificar imágenes</span>
-        <span class="level-desc">Escuchá el sonido y elegí la imagen correcta</span>
-      </button>
-      <button class="level-card" data-level="2">
-        <span class="level-num">Nivel 2</span>
-        <span class="level-title">Completar palabras</span>
-        <span class="level-desc">Escribí el sonido que falta en cada palabra</span>
-      </button>
-      <button class="level-card" data-level="3">
-        <span class="level-num">Nivel 3</span>
-        <span class="level-title">Encontrar las correctas</span>
-        <span class="level-desc">Marcá todas las imágenes que llevan ese sonido</span>
-      </button>
-    </div>
-  </section>
-
-  <!-- ---------- NIVEL 1 ---------- -->
-  <section id="level1" class="level-screen">
-    <div class="level-header">
-      <button class="btn-back-level" data-back-to="levelSelect">← Niveles</button>
-      <div class="progress-pill"><span id="l1-progress">1</span> / <span id="l1-total">10</span></div>
-    </div>
-    <h2 class="level-question">¿Con qué sonido empieza esta palabra?</h2>
-
-    <div class="game-card">
-      <div class="image-stage" id="l1-image-stage"></div>
-      <div class="options-row" id="l1-options"></div>
-      <div class="feedback-box" id="l1-feedback" aria-live="polite"></div>
-    </div>
-
-    <div class="score-row">
-      <span class="score-chip correct"><span id="l1-correct">0</span> aciertos</span>
-      <span class="score-chip incorrect"><span id="l1-incorrect">0</span> errores</span>
-    </div>
-  </section>
-
-  <!-- ---------- NIVEL 2 ---------- -->
-  <section id="level2" class="level-screen">
-    <div class="level-header">
-      <button class="btn-back-level" data-back-to="levelSelect">← Niveles</button>
-      <div class="progress-pill"><span id="l2-progress">1</span> / <span id="l2-total">10</span></div>
-    </div>
-    <h2 class="level-question">Completá el nombre del dibujo</h2>
-
-    <div class="game-card">
-      <div class="image-stage" id="l2-image-stage"></div>
-      <form id="l2-form" class="word-builder" autocomplete="off">
-        <div class="word-blank" id="l2-word-blank"></div>
-        <button type="submit" class="btn-check">Comprobar</button>
-      </form>
-      <div class="feedback-box" id="l2-feedback" aria-live="polite"></div>
-    </div>
-
-    <div class="score-row">
-      <span class="score-chip correct"><span id="l2-correct">0</span> aciertos</span>
-      <span class="score-chip incorrect"><span id="l2-incorrect">0</span> errores</span>
-    </div>
-  </section>
-
-  <!-- ---------- NIVEL 3 ---------- -->
-  <section id="level3" class="level-screen">
-    <div class="level-header">
-      <button class="btn-back-level" data-back-to="levelSelect">← Niveles</button>
-      <div class="progress-pill"><span id="l3-progress">1</span> / <span id="l3-total">5</span></div>
-    </div>
-    <h2 class="level-question">Marcá todos los dibujos que llevan el sonido indicado</h2>
-    <p class="level-subtext" id="l3-instruction"></p>
-
-    <div class="game-card wide">
-      <div class="board-table" id="l3-board"></div>
-      <button class="btn-check" id="l3-submit">Comprobar fila</button>
-      <div class="feedback-box" id="l3-feedback" aria-live="polite"></div>
-    </div>
-
-    <div class="score-row">
-      <span class="score-chip correct"><span id="l3-correct">0</span> aciertos</span>
-      <span class="score-chip incorrect"><span id="l3-incorrect">0</span> errores</span>
-    </div>
-  </section>
-
-  <!-- ---------- PANTALLA FINAL ---------- -->
-  <section id="levelComplete" class="level-complete">
-    <div class="mascot celebrate" aria-hidden="true">
-      <svg viewBox="0 0 120 160" class="mascot-svg">
-        <ellipse cx="60" cy="150" rx="34" ry="8" class="mascot-shadow"/>
-        <polygon points="60,10 80,40 40,40" class="pencil-tip"/>
-        <rect x="40" y="40" width="40" height="90" rx="10" class="pencil-body"/>
-        <rect x="40" y="118" width="40" height="14" class="pencil-band"/>
-        <circle cx="50" cy="75" r="6" class="eye happy"/>
-        <circle cx="70" cy="75" r="6" class="eye happy"/>
-        <path d="M46 93 Q60 110 74 93" class="mouth happy"/>
-      </svg>
-    </div>
-    <h2 id="completeTitle">¡Muy bien!</h2>
-    <p id="completeText">Completaste el nivel.</p>
-    <div class="complete-stats">
-      <div class="stat-box">
-        <span class="stat-value" id="completeCorrect">0</span>
-        <span class="stat-label">Aciertos</span>
-      </div>
-      <div class="stat-box">
-        <span class="stat-value" id="completeIncorrect">0</span>
-        <span class="stat-label">Errores</span>
-      </div>
-    </div>
-    <div class="complete-actions">
-      <button class="btn-retry" id="btnRetryLevel">Jugar de nuevo</button>
-      <button class="btn-check" id="btnToLevels">Elegir otro nivel</button>
-    </div>
-  </section>
-
-</main>
-
-<script src="script.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".activity-card[data-activity]").forEach(card => {
+    const btn = card.querySelector(".btn-enter");
+    const activity = card.dataset.activity;
+    btn.addEventListener("click", () => {
+      window.location.href = activity + ".html";
+    });
+  });
+});
+</script>
 </body>
 </html>
