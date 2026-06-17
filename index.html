@@ -61,14 +61,14 @@
       <button class="btn-enter" data-open="adjetivos">Empezar <span class="arrow">→</span></button>
     </article>
 
-    <article class="activity-card disabled" aria-disabled="true">
+    <article class="activity-card" data-activity="cuento">
       <div class="card-icon-wrap">
-        <span class="card-icon">📚</span>
+        <span class="card-icon">🦢</span>
       </div>
-      <h2>Próximamente</h2>
-      <p>Nueva estación en camino</p>
-      <div class="card-tag muted">En preparación</div>
-      <button class="btn-enter" disabled>Pronto</button>
+      <h2>El Patito Feo</h2>
+      <p>Producción escrita de cuento</p>
+      <div class="card-tag">3 partes</div>
+      <button class="btn-enter" data-open="cuento">Empezar <span class="arrow">→</span></button>
     </article>
   </section>
 </main>
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = card.querySelector(".btn-enter");
     const activity = card.dataset.activity;
     btn.addEventListener("click", () => {
-      window.location.href = activity + ".html";
+      window.location.href = activity === "cuento" ? "cuento.html" : activity + ".html";
     });
   });
 });
