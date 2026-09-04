@@ -148,7 +148,7 @@ body::before {
 
 .home-title {
   font-family: var(--ff-display);
-  font-size: 4.6rem;
+  font-size: clamp(2rem, 3.4vh, 3rem);
   color: #fff;
   text-align: center;
   margin: 0 0 6px;
