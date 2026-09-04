@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>El Explorador del Tiempo · Verbos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- partículas de fondo -->
+<div class="particles" id="particles" aria-hidden="true"></div>
+
+<!-- ======================== PANTALLA: PORTADA ======================== -->
+<div id="screen-home" class="screen active">
+  <div class="home-wrap">
+    <div class="home-brand">
+      <div class="time-machine" aria-hidden="true">
+        <div class="tm-body">
+          <div class="tm-window">🦉</div>
+          <div class="tm-lights">
+            <span class="tm-light l1"></span>
+            <span class="tm-light l2"></span>
+            <span class="tm-light l3"></span>
+          </div>
+        </div>
+        <div class="tm-base"></div>
+      </div>
+      <h1 class="home-title">El Explorador<br>del Tiempo</h1>
+      <p class="home-sub">Viajá por el pasado, el presente y el futuro<br>¡y dominá los verbos!</p>
+
+      <div class="coin-display" id="homeCoinDisplay">
+        <span class="coin-icon">🪙</span>
+        <span id="homeCoinCount">0</span> monedas
+      </div>
+    </div>
+
+    <div class="level-map" id="levelMap">
+      <!-- generado por JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ======================== PANTALLA: ACTIVIDAD ======================== -->
+<div id="screen-activity" class="screen">
+
+  <header class="act-header">
+    <button class="btn-home" id="btnHome">🏠 Inicio</button>
+    <div class="act-title-wrap">
+      <span class="act-emoji" id="actEmoji"></span>
+      <h2 class="act-title" id="actTitle"></h2>
+    </div>
+    <div class="coins-live">
+      <span class="coin-icon">🪙</span>
+      <span id="liveCoins">0</span>
+    </div>
+  </header>
+
+  <div class="progress-bar-wrap">
+    <div class="progress-bar" id="progressBar"></div>
+    <span class="progress-label" id="progressLabel">1 / 10</span>
+  </div>
+
+  <!-- Mascota -->
+  <div class="memo-wrap" id="memoWrap" aria-hidden="true">
+    <div class="memo-body" id="memoBody">
+      <div class="memo-eyes">
+        <div class="memo-eye"><div class="memo-pupil"></div></div>
+        <div class="memo-eye"><div class="memo-pupil"></div></div>
+      </div>
+      <div class="memo-beak">▽</div>
+    </div>
+    <div class="memo-speech" id="memoSpeech"></div>
+  </div>
+
+  <!-- zona de ejercicio (se llena por JS) -->
+  <div class="exercise-zone" id="exerciseZone"></div>
+
+  <!-- botón de avance (oculto hasta respuesta correcta) -->
+  <button class="btn-next" id="btnNext" style="display:none">
+    Siguiente <span class="arrow-next">→</span>
+  </button>
+
+</div>
+
+<!-- ======================== PANTALLA: NIVEL COMPLETADO ======================== -->
+<div id="screen-complete" class="screen">
+  <div class="complete-wrap">
+    <div class="complete-mascot">🦉</div>
+    <h2 class="complete-title" id="completeTitle">¡Nivel superado!</h2>
+    <p class="complete-sub" id="completeSub"></p>
+    <div class="medal-earned" id="medalEarned"></div>
+    <div class="coin-earned" id="coinEarned"></div>
+    <button class="btn-continue" id="btnContinue">¡Seguir explorando! 🚀</button>
+    <button class="btn-home2" id="btnHome2">🏠 Volver al inicio</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
