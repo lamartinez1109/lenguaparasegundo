@@ -458,7 +458,6 @@ function renderAct2(zone) {
   zone.innerHTML = `
     <div class="ex-card">
       <span class="ex-emoji-big">${item.emoji}</span>
-      <p class="ex-question">¿Este verbo está en pasado, presente o futuro?</p>
       <div class="tiempo-badges">
         <div class="act2-word-display">&ldquo;${item.verbo}&rdquo;</div>
       </div>
