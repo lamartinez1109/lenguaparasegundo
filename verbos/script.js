@@ -403,19 +403,7 @@ function renderAct1(zone) {
     <div class="ex-card">
       <span class="ex-emoji-big">${item.emoji}</span>
       <p class="ex-question">¿Cuál es la forma en <strong>${askLabel[item.ask]}</strong>?</p>
-      <div class="tres-tiempos" id="tresTiempos">
-        <div class="verbo-card">
-          <div class="vc-label">Pasado</div>
-        </div>
-        <div class="vc-arrow">→</div>
-        <div class="verbo-card">
-          <div class="vc-label">Presente</div>
-        </div>
-        <div class="vc-arrow">→</div>
-        <div class="verbo-card">
-          <div class="vc-label">Futuro</div>
-        </div>
-      </div>
+
       <div class="options-grid row" id="act1opts"></div>
       <div class="inline-feedback" id="act1fb"></div>
     </div>
